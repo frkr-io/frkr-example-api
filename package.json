@@ -1,0 +1,36 @@
+{
+  "name": "frkr-example-api",
+  "version": "0.1.0",
+  "description": "Example Node.js API demonstrating frkr SDK integration for traffic mirroring",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "frkr",
+    "example",
+    "api",
+    "mirroring",
+    "traffic-mirroring",
+    "express"
+  ],
+  "author": "frkr-io",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frkr-io/frkr-example-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/frkr-io/frkr-example-api/issues"
+  },
+  "homepage": "https://github.com/frkr-io/frkr-example-api#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "@frkr-io/sdk-node": "github:frkr-io/frkr-sdk-node"
+  }
+}
+
+
