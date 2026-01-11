@@ -40,11 +40,13 @@ function createApiRoutes() {
 }
 
 // Initialize frkr SDK
+const transport = process.env.FRKR_TRANSPORT || 'http';
 const frkrConfig = {
-  ingestGatewayUrl: process.env.FRKR_INGEST_URL || 'http://localhost:8082',
+  ingestGatewayUrl: process.env.FRKR_INGEST_URL || (transport === 'grpc' ? 'localhost:50051' : 'http://localhost:8082'),
   streamId: process.env.FRKR_STREAM_ID || 'my-api',
   username: process.env.FRKR_USERNAME || 'testuser',
   password: process.env.FRKR_PASSWORD || 'testpass',
+  transport: transport
 };
 
 // Port 3000: Direct API calls (with frkr mirroring)
@@ -59,6 +61,7 @@ apiApp.listen(API_PORT, () => {
   console.log(`✅ API server running on http://localhost:${API_PORT}`);
   console.log(`   Requests will be mirrored to frkr`);
   console.log(`   Stream ID: ${frkrConfig.streamId}`);
+  console.log(`   Transport: ${transport.toUpperCase()} (${frkrConfig.ingestGatewayUrl})`);
 });
 
 // Port 3001: Forwarded requests from frkr CLI

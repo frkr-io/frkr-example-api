@@ -4,7 +4,9 @@
   "description": "Example Node.js API demonstrating frkr SDK integration for traffic mirroring",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:http": "cross-env FRKR_TRANSPORT=http node server.js",
+    "start:grpc": "cross-env FRKR_TRANSPORT=grpc node server.js"
   },
   "keywords": [
     "frkr",
@@ -28,9 +30,10 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "express": "^4.18.0",
-    "@frkr-io/sdk-node": "github:frkr-io/frkr-sdk-node"
+    "@frkr-io/sdk-node": "github:frkr-io/frkr-sdk-node",
+    "express": "^4.18.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
   }
 }
-
-

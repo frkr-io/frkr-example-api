@@ -59,6 +59,24 @@ npm start
 - `FRKR_USERNAME`: `testuser`
 - `FRKR_PASSWORD`: `testpass`
 
+## Modes
+
+You can run the example API in different modes to test various SDK transports:
+
+### HTTP Mode (Default)
+Standard HTTP/JSON mirroring to `http://localhost:8082`.
+```bash
+npm run start:http
+# or just `npm start`
+```
+
+### gRPC Mode
+High-performance gRPC mirroring to `localhost:50051`.
+```bash
+npm run start:grpc
+```
+*Note: Ensure your Ingest Gateway is running with gRPC enabled.*
+
 ## Run
 
 ```bash
