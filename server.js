@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const frkr = require('@frkr-io/sdk-node');
 
@@ -41,13 +42,28 @@ function createApiRoutes() {
 
 // Initialize frkr SDK
 const transport = process.env.FRKR_TRANSPORT || 'http';
-const frkrConfig = {
+const authMethod = process.env.AUTH_METHOD || 'basic';
+
+let frkrConfig = {
   ingestGatewayUrl: process.env.FRKR_INGEST_URL || (transport === 'grpc' ? 'localhost:50051' : 'http://localhost:8082'),
   streamId: process.env.FRKR_STREAM_ID || 'my-api',
-  username: process.env.FRKR_USERNAME || 'testuser',
-  password: process.env.FRKR_PASSWORD || 'testpass',
   transport: transport
 };
+
+if (authMethod === 'oidc') {
+  console.log('🔒 Using OIDC Authentication');
+  frkrConfig.auth = {
+    type: 'oidc',
+    issuer: process.env.OIDC_ISSUER,
+    clientId: process.env.OIDC_CLIENT_ID,
+    clientSecret: process.env.OIDC_CLIENT_SECRET
+  };
+} else {
+  console.log('🔑 Using Basic Authentication');
+  // Legacy/Basic auth uses top-level username/password in SDK config
+  frkrConfig.username = process.env.FRKR_USERNAME || 'testuser';
+  frkrConfig.password = process.env.FRKR_PASSWORD || 'testpass';
+}
 
 // Port 3000: Direct API calls (with frkr mirroring)
 const API_PORT = process.env.API_PORT || 3000;

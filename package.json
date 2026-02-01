@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@frkr-io/sdk-node": "github:frkr-io/frkr-sdk-node",
+    "dotenv": "^17.2.3",
     "express": "^4.18.0"
   },
   "devDependencies": {
